@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Bible Quiz Analytics & Insights</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="verse.html" class="nav-link"><i class="fas fa-verse"></i> Verse of Day</a>
+                <a href="devotionals.html" class="nav-link"><i class="fas fa-book-open"></i> Devotionals</a>
+                <a href="flashcards.html" class="nav-link"><i class="fas fa-layer-group"></i> Flashcards</a>
+                <a href="multiplayer.html" class="nav-link"><i class="fas fa-users"></i> Multiplayer</a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+                <a href="dashboard.html" class="nav-link active"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="../assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="page-title">Analytics Dashboard</h1>
+            <p class="page-subtitle">Track your Bible study progress with detailed analytics and AI-powered insights.</p>
+            
+            <div class="time-range-selector">
+                <button class="time-btn active" data-range="week">This Week</button>
+                <button class="time-btn" data-range="month">This Month</button>
+                <button class="time-btn" data-range="quarter">Last 3 Months</button>
+                <button class="time-btn" data-range="year">This Year</button>
+                <button class="time-btn" data-range="all">All Time</button>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <h3>Today's Score</h3>
+                    <span class="trend up">+12%</span>
+                </div>
+                <div class="kpi-value">245</div>
+                <div class="kpi-progress">
+                    <div class="progress-bar">
+                        <div class="bar-fill" style="width: 82%"></div>
+                    </div>
+                    <span class="progress-text">82% of daily goal</span>
+                </div>
+            </div>
+            
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <h3>Weekly Average</h3>
+                    <span class="trend up">+5%</span>
+                </div>
+                <div class="kpi-value">187</div>
+                <div class="kpi-comparison">
+                    <span>vs last week: 178</span>
+                </div>
+            </div>
+            
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <h3>Monthly Accuracy</h3>
+                    <span class="trend stable">±0%</span>
+                </div>
+                <div class="kpi-value">87%</div>
+                <div class="kpi-detail">
+                    <span>Correct: 425</span>
+                    <span>Total: 489</span>
+                </div>
+            </div>
+            
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <h3>Avg. Response Time</h3>
+                    <span class="trend down">-8%</span>
+                </div>
+                <div class="kpi-value">4.2s</div>
+                <div class="kpi-detail">
+                    <span>Last month: 4.6s</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-grid">
+            <!-- Performance Trend -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Performance Trend</h3>
+                    <div class="chart-legend">
+                        <span class="legend-item"><i class="fas fa-circle score"></i> Score</span>
+                        <span class="legend-item"><i class="fas fa-circle accuracy"></i> Accuracy</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Topic Mastery -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Topic Mastery</h3>
+                    <select class="chart-filter" id="topicFilter">
+                        <option value="all">All Topics</option>
+                        <option value="old-testament">Old Testament</option>
+                        <option value="new-testament">New Testament</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="topicChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Daily Activity -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Daily Activity</h3>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-fire"></i> 7-day streak</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Study Time Distribution -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Study Time Distribution</h3>
+                    <select class="chart-filter" id="timeFilter">
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="timeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Accuracy by Difficulty -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Accuracy by Difficulty</h3>
+                    <div class="difficulty-legend">
+                        <span class="difficulty easy">Easy</span>
+                        <span class="difficulty medium">Medium</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="difficultyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Progress Towards Goals -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Progress Towards Goals</h3>
+                    <button class="btn-outline btn-sm" id="editGoalsBtn">
+                        <i class="fas fa-edit"></i> Edit Goals
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="goalsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Statistics -->
+        <div class="stats-section">
+            <div class="section-header">
+                <h2>Detailed Statistics</h2>
+                <button class="btn-outline" id="exportStatsBtn">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h3>Quiz Performance</h3>
+                    <div class="stats-table">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Quizzes Taken</span>
+                            <span class="stat-value">142</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Average Score</span>
+                            <span class="stat-value">78.5%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Best Score</span>
+                            <span class="stat-value">98%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Questions Answered</span>
+                            <span class="stat-value">2,845</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Correct Answers</span>
+                            <span class="stat-value">2,475</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Total Study Time</span>
+                            <span class="stat-value">45h 22m</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-card">
+                    <h3>Multiplayer Stats</h3>
+                    <div class="stats-table">
+                        <div class="stat-row">
+                            <span class="stat-label">Matches Played</span>
+                            <span class="stat-value">58</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Matches Won</span>
+                            <span class="stat-value">42</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value">72.4%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Current Streak</span>
+                            <span class="stat-value">5</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Best Streak</span>
+                            <span class="stat-value">12</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Tournaments Won</span>
+                            <span class="stat-value">3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-card">
+                    <h3>Flashcard Progress</h3>
+                    <div class="stats-table">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Cards</span>
+                            <span class="stat-value">150</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Mastered Cards</span>
+                            <span class="stat-value">98</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Reviewing Cards</span>
+                            <span class="stat-value">35</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">New Cards</span>
+                            <span class="stat-value">17</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Daily Reviews</span>
+                            <span class="stat-value">82%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Retention Rate</span>
+                            <span class="stat-value">91%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Insights -->
+        <div class="insights-section">
+            <div class="insights-header">
+                <i class="fas fa-robot"></i>
+                <h2>AI-Powered Insights</h2>
+            </div>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Performance Trend</h4>
+                    <p>Your accuracy has improved by 15% over the past month. Keep up the great work!</p>
+                    <div class="insight-metric">
+                        <span class="metric-label">Improvement Rate</span>
+                        <span class="metric-value up">+15%</span>
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Study Recommendation</h4>
+                    <p>Focus on Old Testament prophets. This is your weakest area at 78% accuracy.</p>
+                    <div class="insight-metric">
+                        <span class="metric-label">Current Accuracy</span>
+                        <span class="metric-value">78%</span>
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Optimal Study Time</h4>
+                    <p>You perform best between 7-9 PM. Consider scheduling study sessions during this time.</p>
+                    <div class="insight-metric">
+                        <span class="metric-label">Peak Performance</span>
+                        <span class="metric-value">92% accuracy</span>
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>Achievement Progress</h4>
+                    <p>You're close to earning "Bible Scholar" - complete 3 more quizzes with 90%+ accuracy.</p>
+                    <div class="insight-metric">
+                        <span class="metric-label">Progress</span>
+                        <span class="metric-value">7/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="comparison-section">
+            <h2>How You Compare</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3>vs. All Users</h3>
+                    <div class="comparison-stats">
+                        <div class="comparison-item">
+                            <span class="comparison-label">Accuracy</span>
+                            <div class="comparison-bar">
+                                <div class="bar you" style="width: 87%">
+                                    <span>You: 87%</span>
+                                </div>
+                                <div class="bar average" style="width: 72%">
+                                    <span>Avg: 72%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Response Time</span>
+                            <div class="comparison-bar">
+                                <div class="bar you" style="width: 60%">
+                                    <span>You: 4.2s</span>
+                                </div>
+                                <div class="bar average" style="width: 65%">
+                                    <span>Avg: 5.8s</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Daily Activity</span>
+                            <div class="comparison-bar">
+                                <div class="bar you" style="width: 85%">
+                                    <span>You: 85%</span>
+                                </div>
+                                <div class="bar average" style="width: 45%">
+                                    <span>Avg: 45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-card">
+                    <h3>vs. Your Level</h3>
+                    <div class="comparison-stats">
+                        <div class="comparison-item">
+                            <span class="comparison-label">Quiz Score</span>
+                            <div class="comparison-bar">
+                                <div class="bar you" style="width: 82%">
+                                    <span>You: 245</span>
+                                </div>
+                                <div class="bar average" style="width: 78%">
+                                    <span>Avg: 215</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Flashcard Mastery</span>
+                            <div class="comparison-bar">
+                                <div class="bar you" style="width: 65%">
+                                    <span>You: 65%</span>
+                                </div>
+                                <div class="bar average" style="width: 58%">
+                                    <span>Avg: 58%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="comparison-label">Streak Length</span>
+                            <div class="comparison-bar">
+                                <div class="bar you" style="width: 70%">
+                                    <span>You: 7 days</span>
+                                </div>
+                                <div class="bar average" style="width: 55%">
+                                    <span>Avg: 4.5 days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goals Section -->
+        <div class="goals-section">
+            <div class="section-header">
+                <h2>Your Goals</h2>
+                <button class="btn-primary" id="setNewGoalBtn">
+                    <i class="fas fa-plus"></i> Set New Goal
+                </button>
+            </div>
+            
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <h4>Daily Study Goal</h4>
+                        <span class="goal-status active">Active</span>
+                    </div>
+                    <p>Complete 20 questions daily</p>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="bar-fill" style="width: 75%"></div>
+                        </div>
+                        <span class="progress-text">15/20 (75%)</span>
+                    </div>
+                    <div class="goal-streak">
+                        <i class="fas fa-fire"></i>
+                        <span>Current streak: 7 days</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <h4>Accuracy Improvement</h4>
+                        <span class="goal-status active">Active</span>
+                    </div>
+                    <p>Reach 90% overall accuracy</p>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="bar-fill" style="width: 87%"></div>
+                        </div>
+                        <span class="progress-text">87/90 (97%)</span>
+                    </div>
+                    <div class="goal-deadline">
+                        <i class="fas fa-calendar"></i>
+                        <span>Target: Dec 15</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <h4>Topic Mastery</h4>
+                        <span class="goal-status in-progress">In Progress</span>
+                    </div>
+                    <p>Master all Old Testament topics</p>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="bar-fill" style="width: 65%"></div>
+                        </div>
+                        <span class="progress-text">7/12 topics (65%)</span>
+                    </div>
+                    <div class="goal-milestones">
+                        <i class="fas fa-flag"></i>
+                        <span>3 milestones reached</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <h4>Multiplayer Ranking</h4>
+                        <span class="goal-status completed">Completed</span>
+                    </div>
+                    <p>Reach top 25 in global rankings</p>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="bar-fill" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-text">Rank: #24 ✓</span>
+                    </div>
+                    <div class="goal-completed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Completed: Oct 26</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Bible Quiz Master</h4>
+                <p>Advanced analytics and insights to help you grow in biblical knowledge.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Analytics Tools</h4>
+                <ul>
+                    <li><a href="#">Performance Tracking</a></li>
+                    <li><a href="#">Topic Analysis</a></li>
+                    <li><a href="#">Progress Charts</a></li>
+                    <li><a href="#">AI Insights</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Data & Privacy</h4>
+                <ul>
+                    <li><a href="#">Data Export</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Data Security</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Dashboard Stats</h4>
+                <div class="dashboard-stats">
+                    <div class="stat">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <span class="value">87%</span>
+                            <span class="label">Avg. Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="value">45h</span>
+                            <span class="label">Total Study Time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Bible Quiz Master. All rights reserved. | Analytics powered by Chart.js</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

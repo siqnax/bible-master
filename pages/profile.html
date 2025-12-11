@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile - Bible Quiz Master</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="verse.html" class="nav-link"><i class="fas fa-verse"></i> Verse of Day</a>
+                <a href="devotionals.html" class="nav-link"><i class="fas fa-book-open"></i> Devotionals</a>
+                <a href="flashcards.html" class="nav-link"><i class="fas fa-layer-group"></i> Flashcards</a>
+                <a href="multiplayer.html" class="nav-link"><i class="fas fa-users"></i> Multiplayer</a>
+                <a href="profile.html" class="nav-link active"><i class="fas fa-user"></i> Profile</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="../assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar-section">
+                <div class="avatar-container">
+                    <img src="../assets/avatars/default.png" alt="Profile Avatar" class="profile-avatar" id="profileAvatar">
+                    <button class="avatar-edit" id="editAvatarBtn">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name" id="profileName">John Doe</h1>
+                    <div class="profile-level">
+                        <span class="level-badge theologian">Theologian</span>
+                        <div class="level-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                            <span class="level-text">Level 12 • 8,450/10,000 XP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="streakStat">7</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="rankStat">#24</span>
+                        <span class="stat-label">Global Rank</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="accuracyStat">87%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="timeStat">4.2s</span>
+                        <span class="stat-label">Avg. Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <!-- Navigation Tabs -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="achievements">Achievements</button>
+                <button class="tab-btn" data-tab="activity">Recent Activity</button>
+                <button class="tab-btn" data-tab="settings">Settings</button>
+                <button class="tab-btn" data-tab="data">Data Management</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content active" id="overviewTab">
+                <div class="overview-grid">
+                    <!-- Quick Stats -->
+                    <div class="overview-card stats-card">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Quizzes</span>
+                                <span class="stat-value">142</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Questions Answered</span>
+                                <span class="stat-value">2,845</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Total XP</span>
+                                <span class="stat-value">8,450</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Multiplayer Wins</span>
+                                <span class="stat-value">42</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Flashcards Mastered</span>
+                                <span class="stat-value">98</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Days Active</span>
+                                <span class="stat-value">67</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topic Mastery -->
+                    <div class="overview-card mastery-card">
+                        <h3>Topic Mastery</h3>
+                        <div class="mastery-list">
+                            <div class="mastery-item">
+                                <div class="mastery-info">
+                                    <span class="mastery-topic">Old Testament</span>
+                                    <span class="mastery-percent">92%</span>
+                                </div>
+                                <div class="mastery-bar">
+                                    <div class="bar-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="mastery-item">
+                                <div class="mastery-info">
+                                    <span class="mastery-topic">New Testament</span>
+                                    <span class="mastery-percent">88%</span>
+                                </div>
+                                <div class="mastery-bar">
+                                    <div class="bar-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="mastery-item">
+                                <div class="mastery-info">
+                                    <span class="mastery-topic">The Gospels</span>
+                                    <span class="mastery-percent">95%</span>
+                                </div>
+                                <div class="mastery-bar">
+                                    <div class="bar-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="mastery-item">
+                                <div class="mastery-info">
+                                    <span class="mastery-topic">Prophets</span>
+                                    <span class="mastery-percent">78%</span>
+                                </div>
+                                <div class="mastery-bar">
+                                    <div class="bar-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div class="mastery-item">
+                                <div class="mastery-info">
+                                    <span class="mastery-topic">Wisdom Books</span>
+                                    <span class="mastery-percent">85%</span>
+                                </div>
+                                <div class="mastery-bar">
+                                    <div class="bar-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Achievements -->
+                    <div class="overview-card achievements-preview">
+                        <div class="card-header">
+                            <h3>Recent Achievements</h3>
+                            <a href="#achievements" class="view-all">View All</a>
+                        </div>
+                        <div class="achievements-grid" id="recentAchievements">
+                            <!-- Achievements will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Level Progress -->
+                    <div class="overview-card level-card">
+                        <h3>Level Progress</h3>
+                        <div class="level-display">
+                            <div class="level-circle">
+                                <div class="circle-progress" data-progress="85">
+                                    <span class="level-number">12</span>
+                                </div>
+                            </div>
+                            <div class="level-info">
+                                <h4>Theologian</h4>
+                                <p>You're in the top 5% of players!</p>
+                                <div class="next-level">
+                                    <span>Next Level: 1,550 XP needed</span>
+                                    <div class="progress-bar">
+                                        <div class="bar-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-rewards">
+                            <h4>Level Rewards</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Unlocked Expert Mode</li>
+                                <li><i class="fas fa-check-circle"></i> Can create tournaments</li>
+                                <li><i class="fas fa-star"></i> Next: Custom avatar frames</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Daily Goal -->
+                    <div class="overview-card goal-card">
+                        <h3>Today's Goal</h3>
+                        <div class="goal-progress">
+                            <div class="goal-circle">
+                                <div class="circle-progress" data-progress="75">
+                                    <span class="goal-percent">75%</span>
+                                </div>
+                            </div>
+                            <div class="goal-info">
+                                <h4>15/20 Questions</h4>
+                                <p>Complete 5 more questions to reach today's goal!</p>
+                                <div class="goal-buttons">
+                                    <button class="btn-primary">
+                                        <i class="fas fa-play-circle"></i> Continue Quiz
+                                    </button>
+                                    <button class="btn-outline">
+                                        <i class="fas fa-redo"></i> Change Goal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendations -->
+                    <div class="overview-card ai-card">
+                        <div class="ai-header">
+                            <i class="fas fa-robot"></i>
+                            <h3>AI Study Recommendations</h3>
+                        </div>
+                        <div class="ai-content">
+                            <p>Based on your performance, we recommend focusing on <strong>Prophets</strong> to improve your weakest area.</p>
+                            <ul class="recommendations">
+                                <li><i class="fas fa-book"></i> Study Isaiah chapters 40-55</li>
+                                <li><i class="fas fa-flashcards"></i> Review Prophet flashcards</li>
+                                <li><i class="fas fa-gamepad"></i> Try Prophet-specific quiz</li>
+                            </ul>
+                            <button class="btn-outline">
+                                <i class="fas fa-chart-line"></i> View Detailed Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Tab -->
+            <div class="tab-content" id="achievementsTab">
+                <div class="achievements-header">
+                    <h3>Your Achievements</h3>
+                    <div class="achievement-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Unlocked</button>
+                        <button class="filter-btn">Locked</button>
+                        <button class="filter-btn">Rare</button>
+                    </div>
+                </div>
+                <div class="achievements-grid-full" id="allAchievements">
+                    <!-- All achievements will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Recent Activity Tab -->
+            <div class="tab-content" id="activityTab">
+                <div class="activity-header">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-filters">
+                        <select id="activityFilter">
+                            <option value="all">All Activities</option>
+                            <option value="quiz">Quizzes</option>
+                            <option value="multiplayer">Multiplayer</option>
+                            <option value="flashcard">Flashcards</option>
+                            <option value="achievement">Achievements</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="activity-timeline" id="activityTimeline">
+                    <!-- Activity items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settingsTab">
+                <div class="settings-grid">
+                    <!-- Profile Settings -->
+                    <div class="settings-card">
+                        <h3>Profile Settings</h3>
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" id="username" value="JohnDoe" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="email" value="john.doe@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input type="text" id="displayName" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Bio</label>
+                                <textarea id="bio" rows="3">Passionate about studying God's Word and sharing biblical knowledge with others.</textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Notification Settings -->
+                    <div class="settings-card">
+                        <h3>Notification Settings</h3>
+                        <div class="toggle-list">
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Daily Reminders</span>
+                                    <span class="toggle-desc">Get notified to complete your daily goal</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="dailyReminders" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Verse of the Day</span>
+                                    <span class="toggle-desc">Receive daily Bible verses</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="verseNotifications" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Achievement Unlocks</span>
+                                    <span class="toggle-desc">Get notified when you earn achievements</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="achievementNotifications" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Multiplayer Challenges</span>
+                                    <span class="toggle-desc">Notifications for multiplayer matches</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="multiplayerNotifications" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Email Newsletter</span>
+                                    <span class="toggle-desc">Weekly study tips and updates</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailNewsletter" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Settings -->
+                    <div class="settings-card">
+                        <h3>Privacy Settings</h3>
+                        <div class="toggle-list">
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Public Profile</span>
+                                    <span class="toggle-desc">Allow others to view your profile</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="publicProfile" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Show on Leaderboards</span>
+                                    <span class="toggle-desc">Display your name on public leaderboards</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="showOnLeaderboards" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Allow Friend Requests</span>
+                                    <span class="toggle-desc">Let other users send you friend requests</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="allowFriendRequests" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="toggle-info">
+                                    <span class="toggle-label">Activity Visibility</span>
+                                    <span class="toggle-desc">Share your recent activity with friends</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="activityVisibility" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Preferences -->
+                    <div class="settings-card">
+                        <h3>Study Preferences</h3>
+                        <div class="preference-list">
+                            <div class="form-group">
+                                <label>Default Quiz Length</label>
+                                <select id="defaultQuizLength">
+                                    <option value="10">10 Questions</option>
+                                    <option value="15" selected>15 Questions</option>
+                                    <option value="20">20 Questions</option>
+                                    <option value="25">25 Questions</option>
+                                    <option value="30">30 Questions</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Default Difficulty</label>
+                                <select id="defaultDifficulty">
+                                    <option value="mixed">Mixed</option>
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Bible Translation</label>
+                                <select id="bibleTranslation">
+                                    <option value="niv">NIV (New International Version)</option>
+                                    <option value="esv">ESV (English Standard Version)</option>
+                                    <option value="nlt">NLT (New Living Translation)</option>
+                                    <option value="kjv">KJV (King James Version)</option>
+                                    <option value="nasb">NASB (New American Standard Bible)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Daily Goal</label>
+                                <select id="dailyGoal">
+                                    <option value="10">10 Questions</option>
+                                    <option value="15">15 Questions</option>
+                                    <option value="20" selected>20 Questions</option>
+                                    <option value="25">25 Questions</option>
+                                    <option value="30">30 Questions</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Management Tab -->
+            <div class="tab-content" id="dataTab">
+                <div class="data-management">
+                    <div class="data-card">
+                        <h3>Export Data</h3>
+                        <p>Download your progress, quiz history, and achievements.</p>
+                        <div class="data-options">
+                            <button class="btn-outline" id="exportProgressBtn">
+                                <i class="fas fa-download"></i> Export Progress
+                            </button>
+                            <button class="btn-outline" id="exportQuizHistoryBtn">
+                                <i class="fas fa-history"></i> Export Quiz History
+                            </button>
+                            <button class="btn-outline" id="exportAchievementsBtn">
+                                <i class="fas fa-trophy"></i> Export Achievements
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <h3>Import Data</h3>
+                        <p>Restore your progress from a backup file.</p>
+                        <div class="import-section">
+                            <input type="file" id="importFile" accept=".json" style="display: none;">
+                            <button class="btn-outline" id="importDataBtn">
+                                <i class="fas fa-upload"></i> Choose File
+                            </button>
+                            <span class="file-name" id="fileName">No file selected</span>
+                        </div>
+                    </div>
+
+                    <div class="data-card warning-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                        <p>These actions cannot be undone. Proceed with caution.</p>
+                        <div class="danger-actions">
+                            <button class="btn-danger" id="resetProgressBtn">
+                                <i class="fas fa-redo"></i> Reset Progress
+                            </button>
+                            <button class="btn-danger" id="deleteAccountBtn">
+                                <i class="fas fa-trash"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avatar Upload Modal -->
+        <div class="modal" id="avatarModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Change Avatar</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="avatar-options">
+                        <h4>Choose Avatar</h4>
+                        <div class="avatar-grid" id="avatarGrid">
+                            <!-- Avatar options will be populated by JavaScript -->
+                        </div>
+                        <div class="avatar-upload">
+                            <h4>Upload Custom Avatar</h4>
+                            <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                            <button class="btn-outline" id="uploadAvatarBtn">
+                                <i class="fas fa-cloud-upload-alt"></i> Upload Image
+                            </button>
+                            <p class="upload-hint">Max size: 2MB • Supported: JPG, PNG, GIF</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancelAvatarBtn">Cancel</button>
+                    <button class="btn-primary" id="saveAvatarBtn">Save Avatar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset Progress Modal -->
+        <div class="modal" id="resetModal">
+            <div class="modal-content warning-modal">
+                <div class="modal-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Reset Progress</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to reset all your progress? This action cannot be undone.</p>
+                    <ul class="warning-list">
+                        <li><i class="fas fa-times"></i> All quiz scores will be deleted</li>
+                        <li><i class="fas fa-times"></i> All achievements will be reset</li>
+                        <li><i class="fas fa-times"></i> All progress will be lost</li>
+                        <li><i class="fas fa-times"></i> Your level will be reset to 1</li>
+                    </ul>
+                    <div class="warning-confirm">
+                        <label>
+                            <input type="checkbox" id="resetConfirm">
+                            <span>I understand this action cannot be undone</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancelResetBtn">Cancel</button>
+                    <button class="btn-danger" id="confirmResetBtn" disabled>
+                        <i class="fas fa-redo"></i> Reset Progress
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Bible Quiz Master</h4>
+                <p>Track your biblical knowledge journey and grow in your understanding of God's Word.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Profile Features</h4>
+                <ul>
+                    <li><a href="#overview">Progress Tracking</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#activity">Activity History</a></li>
+                    <li><a href="#settings">Custom Settings</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Data Management</h4>
+                <ul>
+                    <li><a href="#data">Export Progress</a></li>
+                    <li><a href="#data">Import Data</a></li>
+                    <li><a href="#privacy">Privacy Settings</a></li>
+                    <li><a href="#support">Account Help</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Your Progress</h4>
+                <div class="progress-summary">
+                    <div class="summary-item">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <span class="value">67 days</span>
+                            <span class="label">Study Streak</span>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <span class="value">92%</span>
+                            <span class="label">Overall Mastery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Bible Quiz Master. All rights reserved. | Your data is stored locally and securely</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,247 @@
+[
+    {
+      "id": 1,
+      "type": "multiple-choice",
+      "question": "Who was the first man created by God?",
+      "choices": ["Adam", "Eve", "Noah", "Abraham"],
+      "correctAnswer": "Adam",
+      "reference": "Genesis 2:7",
+      "difficulty": "easy",
+      "topic": ["old-testament", "creation"],
+      "tags": ["people", "beginnings"],
+      "points": 10,
+      "negativePoints": 0,
+      "timer": 30,
+      "hints": [
+        "Think about the creation story",
+        "He named all the animals",
+        "His wife was created from his rib"
+      ],
+      "explanations": {
+        "Eve": "Eve was the first woman, not the first man",
+        "Noah": "Noah built the ark during the flood",
+        "Abraham": "Abraham is the father of many nations"
+      }
+    },
+    {
+      "id": 2,
+      "type": "multiple-choice",
+      "question": "How many days did God take to create the world?",
+      "choices": ["6 days", "7 days", "40 days", "1 day"],
+      "correctAnswer": "6 days",
+      "reference": "Genesis 1:31",
+      "difficulty": "easy",
+      "topic": ["old-testament", "creation"],
+      "tags": ["numbers", "beginnings"],
+      "points": 10,
+      "negativePoints": 0,
+      "timer": 25,
+      "hints": [
+        "God rested on the seventh day",
+        "It's in the first chapter of Genesis",
+        "Each day had 'evening and morning'"
+      ],
+      "explanations": {
+        "7 days": "God created in 6 days and rested on the 7th",
+        "40 days": "40 days is associated with the flood",
+        "1 day": "Creation took more than one day"
+      }
+    },
+    {
+      "id": 3,
+      "type": "true-false",
+      "question": "Jesus turned water into wine at the wedding in Cana.",
+      "choices": ["True", "False"],
+      "correctAnswer": "True",
+      "reference": "John 2:1-11",
+      "difficulty": "easy",
+      "topic": ["new-testament", "gospels", "miracles"],
+      "tags": ["Jesus", "miracles", "John"],
+      "points": 10,
+      "negativePoints": 2,
+      "timer": 20,
+      "hints": [
+        "This was Jesus' first miracle",
+        "It happened at a wedding celebration",
+        "His mother Mary was there"
+      ],
+      "explanations": {
+        "False": "This was indeed Jesus' first recorded miracle"
+      }
+    },
+    {
+      "id": 4,
+      "type": "multiple-choice",
+      "question": "Who betrayed Jesus for 30 pieces of silver?",
+      "choices": ["Judas Iscariot", "Peter", "Thomas", "Pontius Pilate"],
+      "correctAnswer": "Judas Iscariot",
+      "reference": "Matthew 26:14-16",
+      "difficulty": "medium",
+      "topic": ["new-testament", "gospels", "passion"],
+      "tags": ["disciples", "betrayal", "money"],
+      "points": 15,
+      "negativePoints": 3,
+      "timer": 30,
+      "hints": [
+        "He was one of the twelve disciples",
+        "He later regretted his actions",
+        "The price was the cost of a slave"
+      ],
+      "explanations": {
+        "Peter": "Peter denied Jesus but didn't betray him for money",
+        "Thomas": "Thomas doubted Jesus' resurrection",
+        "Pontius Pilate": "Pilate authorized the crucifixion"
+      }
+    },
+    {
+      "id": 5,
+      "type": "multiple-choice",
+      "question": "What was the name of the sea that Moses parted?",
+      "choices": ["Red Sea", "Dead Sea", "Sea of Galilee", "Mediterranean Sea"],
+      "correctAnswer": "Red Sea",
+      "reference": "Exodus 14:21",
+      "difficulty": "medium",
+      "topic": ["old-testament", "exodus", "miracles"],
+      "tags": ["Moses", "miracles", "escape"],
+      "points": 15,
+      "negativePoints": 3,
+      "timer": 30,
+      "hints": [
+        "The Israelites escaped from Egypt through it",
+        "It's mentioned in the book of Exodus",
+        "Pharaoh's army drowned in it"
+      ],
+      "explanations": {
+        "Dead Sea": "The Dead Sea is in Israel/Jordan region",
+        "Sea of Galilee": "Jesus performed miracles here",
+        "Mediterranean Sea": "This sea borders Israel to the west"
+      }
+    },
+    {
+      "id": 6,
+      "type": "multiple-choice",
+      "question": "Who was thrown into a lions' den but survived unharmed?",
+      "choices": ["Daniel", "David", "Samson", "Joseph"],
+      "correctAnswer": "Daniel",
+      "reference": "Daniel 6:22",
+      "difficulty": "medium",
+      "topic": ["old-testament", "prophets", "miracles"],
+      "tags": ["prophets", "miracles", "animals"],
+      "points": 15,
+      "negativePoints": 3,
+      "timer": 30,
+      "hints": [
+        "He was a prophet in Babylon",
+        "He interpreted dreams for kings",
+        "He prayed three times a day"
+      ],
+      "explanations": {
+        "David": "David fought Goliath, not lions in a den",
+        "Samson": "Samson fought a lion with his bare hands",
+        "Joseph": "Joseph was thrown into a pit by his brothers"
+      }
+    },
+    {
+      "id": 7,
+      "type": "multiple-choice",
+      "question": "Which book comes immediately after Psalms in the Bible?",
+      "choices": ["Proverbs", "Job", "Ecclesiastes", "Isaiah"],
+      "correctAnswer": "Proverbs",
+      "reference": "Bible Order",
+      "difficulty": "hard",
+      "topic": ["old-testament", "wisdom"],
+      "tags": ["books", "order", "wisdom"],
+      "points": 20,
+      "negativePoints": 5,
+      "timer": 40,
+      "hints": [
+        "It's a wisdom literature book",
+        "It contains many short sayings",
+        "Most of it was written by Solomon"
+      ],
+      "explanations": {
+        "Job": "Job comes before Psalms",
+        "Ecclesiastes": "Ecclesiastes comes after Proverbs",
+        "Isaiah": "Isaiah is a prophetic book, much later"
+      }
+    },
+    {
+      "id": 8,
+      "type": "fill-in-the-gap",
+      "question": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal ____.",
+      "choices": ["life", "joy", "peace", "hope"],
+      "correctAnswer": "life",
+      "reference": "John 3:16",
+      "difficulty": "easy",
+      "topic": ["new-testament", "gospels", "salvation"],
+      "tags": ["memorization", "gospel", "John"],
+      "points": 10,
+      "negativePoints": 0,
+      "timer": 25,
+      "hints": [
+        "This is one of the most famous Bible verses",
+        "It speaks about God's gift to humanity",
+        "The opposite is 'perish'"
+      ],
+      "explanations": {
+        "joy": "While believers have joy, the verse specifically says 'life'",
+        "peace": "Peace comes from God but isn't the word in this verse",
+        "hope": "Hope is important but not the completion of John 3:16"
+      }
+    },
+    {
+      "id": 9,
+      "type": "multiple-answer",
+      "question": "Which of the following are considered 'Synoptic Gospels'? (Select all that apply)",
+      "choices": ["Matthew", "Mark", "Luke", "John", "Acts"],
+      "correctAnswer": ["Matthew", "Mark", "Luke"],
+      "reference": "Gospel Studies",
+      "difficulty": "hard",
+      "topic": ["new-testament", "gospels"],
+      "tags": ["gospels", "theology", "study"],
+      "points": 25,
+      "negativePoints": 8,
+      "timer": 45,
+      "hints": [
+        "They share similar content and structure",
+        "The fourth gospel is different in style",
+        "There are three of them"
+      ],
+      "explanations": {
+        "John": "John's gospel is theological and different from the synoptics",
+        "Acts": "Acts is a historical book, not a gospel"
+      }
+    },
+    {
+      "id": 10,
+      "type": "scripture-matching",
+      "question": "Match the following books with their authors:",
+      "choices": [
+        {"item": "Romans", "match": "Paul"},
+        {"item": "James", "match": "James"},
+        {"item": "Hebrews", "match": "Unknown"},
+        {"item": "Revelation", "match": "John"}
+      ],
+      "correctAnswer": ["Paul", "James", "Unknown", "John"],
+      "reference": "Various",
+      "difficulty": "hard",
+      "topic": ["new-testament", "epistles"],
+      "tags": ["authorship", "books", "Bible study"],
+      "points": 30,
+      "negativePoints": 10,
+      "timer": 60,
+      "hints": [
+        "Romans is a Pauline epistle",
+        "James was Jesus' brother",
+        "Hebrews' author is debated by scholars",
+        "Revelation was written by John of Patmos"
+      ],
+      "explanations": {
+        "matching": "Check traditional authorship attributions"
+      }
+    }
+  ] 
+
+
+
+  

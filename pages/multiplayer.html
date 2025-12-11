@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Bible Challenges - Compete in Real-time</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="multiplayer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="verse.html" class="nav-link"><i class="fas fa-verse"></i> Verse of Day</a>
+                <a href="devotionals.html" class="nav-link"><i class="fas fa-book-open"></i> Devotionals</a>
+                <a href="flashcards.html" class="nav-link"><i class="fas fa-layer-group"></i> Flashcards</a>
+                <a href="multiplayer.html" class="nav-link active"><i class="fas fa-users"></i> Multiplayer</a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="../assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container multiplayer-container">
+        <div class="multiplayer-header">
+            <h1 class="page-title">Multiplayer Challenges</h1>
+            <p class="page-subtitle">Compete against other believers in real-time Bible quizzes. Test your knowledge and climb the leaderboard!</p>
+            
+            <div class="player-stats">
+                <div class="player-card">
+                    <div class="player-rank">
+                        <div class="rank-badge gold">
+                            <i class="fas fa-crown"></i>
+                            <span>#24</span>
+                        </div>
+                        <div class="player-info">
+                            <h4>Your Rank</h4>
+                            <p>Top 5% of players</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <div class="player-stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-value">87%</span>
+                            <span class="stat-label">Win Rate</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">42</span>
+                            <span class="stat-label">Matches Won</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">5</span>
+                            <span class="stat-label">Win Streak</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <button class="btn-primary btn-create-room">
+                        <i class="fas fa-plus-circle"></i> Create Room
+                    </button>
+                    <button class="btn-outline btn-find-match">
+                        <i class="fas fa-search"></i> Find Match
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="multiplayer-content">
+            <!-- Quick Play Options -->
+            <div class="quick-play-section">
+                <h3>Quick Play</h3>
+                <div class="play-options-grid">
+                    <div class="play-option">
+                        <div class="option-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Quick Match</h4>
+                        <p>Get matched with a player of similar skill level</p>
+                        <button class="btn-play" data-type="quick">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                        <div class="queue-info">
+                            <span class="online-dot"></span>
+                            <span>15 players in queue</span>
+                        </div>
+                    </div>
+                    
+                    <div class="play-option">
+                        <div class="option-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Tournament</h4>
+                        <p>Join scheduled tournaments with prizes</p>
+                        <button class="btn-play" data-type="tournament">
+                            <i class="fas fa-trophy"></i> Join Next
+                        </button>
+                        <div class="tournament-info">
+                            <span>Next: 3:00 PM EST</span>
+                        </div>
+                    </div>
+                    
+                    <div class="play-option">
+                        <div class="option-icon">
+                            <i class="fas fa-friend"></i>
+                        </div>
+                        <h4>Play with Friends</h4>
+                        <p>Invite friends with a room code</p>
+                        <div class="room-code-input">
+                            <input type="text" placeholder="Enter room code" id="roomCode">
+                            <button class="btn-join">
+                                <i class="fas fa-sign-in-alt"></i> Join
+                            </button>
+                        </div>
+                        <button class="btn-create" id="createPrivateRoom">
+                            <i class="fas fa-lock"></i> Create Private Room
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Rooms -->
+            <div class="rooms-section">
+                <div class="section-header">
+                    <h3>Active Rooms</h3>
+                    <div class="room-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Easy</button>
+                        <button class="filter-btn">Medium</button>
+                        <button class="filter-btn">Hard</button>
+                        <button class="filter-btn">Tournament</button>
+                    </div>
+                </div>
+                
+                <div class="rooms-grid" id="roomsGrid">
+                    <!-- Rooms will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="section-header">
+                    <h3>Top Players</h3>
+                    <div class="time-filters">
+                        <button class="time-btn active">Today</button>
+                        <button class="time-btn">This Week</button>
+                        <button class="time-btn">All Time</button>
+                    </div>
+                </div>
+                
+                <div class="leaderboard-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Score</th>
+                                <th>Wins</th>
+                                <th>Win Rate</th>
+                                <th>Streak</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <!-- Leaderboard will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tournament Schedule -->
+            <div class="tournaments-section">
+                <h3>Upcoming Tournaments</h3>
+                <div class="tournaments-list">
+                    <div class="tournament-card featured">
+                        <div class="tournament-header">
+                            <span class="tournament-badge">
+                                <i class="fas fa-star"></i> Featured
+                            </span>
+                            <span class="tournament-time">Today, 8:00 PM EST</span>
+                        </div>
+                        <h4>Sunday Night Bible Challenge</h4>
+                        <p>50 questions • OT Focus • Prize Pool: 500 XP</p>
+                        <div class="tournament-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>24/32 Registered</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-trophy"></i>
+                                <span>Top 3 Win Prizes</span>
+                            </div>
+                        </div>
+                        <button class="btn-register">
+                            <i class="fas fa-calendar-check"></i> Register Now
+                        </button>
+                    </div>
+                    
+                    <div class="tournament-card">
+                        <div class="tournament-header">
+                            <span class="tournament-badge">Weekly</span>
+                            <span class="tournament-time">Tomorrow, 7:00 PM EST</span>
+                        </div>
+                        <h4>Gospels Mastery Tournament</h4>
+                        <p>30 questions • All 4 Gospels • Prize Pool: 300 XP</p>
+                        <div class="tournament-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>18/24 Registered</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-trophy"></i>
+                                <span>Top 5 Win Prizes</span>
+                            </div>
+                        </div>
+                        <button class="btn-register">
+                            <i class="fas fa-calendar-check"></i> Register Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room Creation Modal -->
+        <div class="modal" id="roomCreationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create Multiplayer Room</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="roomCreationForm">
+                        <div class="form-group">
+                            <label>Room Name</label>
+                            <input type="text" id="roomName" placeholder="Enter room name" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Question Count</label>
+                                <select id="roomQuestionCount">
+                                    <option value="10">10 Questions</option>
+                                    <option value="15" selected>15 Questions</option>
+                                    <option value="20">20 Questions</option>
+                                    <option value="25">25 Questions</option>
+                                    <option value="30">30 Questions</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Time per Question</label>
+                                <select id="roomTimePerQuestion">
+                                    <option value="15">15 seconds</option>
+                                    <option value="20" selected>20 seconds</option>
+                                    <option value="25">25 seconds</option>
+                                    <option value="30">30 seconds</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Topic</label>
+                            <select id="roomTopic">
+                                <option value="random">Random Mix</option>
+                                <option value="old-testament">Old Testament</option>
+                                <option value="new-testament">New Testament</option>
+                                <option value="gospels">The Gospels</option>
+                                <option value="prophets">Prophets</option>
+                                <option value="wisdom">Wisdom Books</option>
+                                <option value="paul">Paul's Letters</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Difficulty</label>
+                            <select id="roomDifficulty">
+                                <option value="mixed">Mixed</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Room Type</label>
+                            <div class="room-type-selector">
+                                <label class="room-type-option">
+                                    <input type="radio" name="roomType" value="public" checked>
+                                    <div class="option-content">
+                                        <i class="fas fa-globe"></i>
+                                        <span>Public Room</span>
+                                        <small>Anyone can join</small>
+                                    </div>
+                                </label>
+                                <label class="room-type-option">
+                                    <input type="radio" name="roomType" value="private">
+                                    <div class="option-content">
+                                        <i class="fas fa-lock"></i>
+                                        <span>Private Room</span>
+                                        <small>Password protected</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group password-field" id="passwordField" style="display: none;">
+                            <label>Room Password</label>
+                            <input type="password" id="roomPassword" placeholder="Enter password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Maximum Players</label>
+                            <div class="slider-container">
+                                <input type="range" min="2" max="10" value="4" class="slider" id="maxPlayers">
+                                <div class="slider-value">
+                                    <span id="maxPlayersValue">4</span> players
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancelRoomBtn">Cancel</button>
+                    <button class="btn-primary" id="createRoomBtn">
+                        <i class="fas fa-plus-circle"></i> Create Room
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Match Found Modal -->
+        <div class="modal" id="matchFoundModal">
+            <div class="modal-content match-modal">
+                <div class="match-header">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Match Found!</h3>
+                </div>
+                <div class="match-content">
+                    <div class="players-display">
+                        <div class="player-display you">
+                            <div class="player-avatar">
+                                <img src="../assets/avatars/default.png" alt="You">
+                            </div>
+                            <div class="player-info">
+                                <h4>You</h4>
+                                <p>Rank: #24</p>
+                            </div>
+                        </div>
+                        
+                        <div class="vs-circle">
+                            <span>VS</span>
+                        </div>
+                        
+                        <div class="player-display opponent">
+                            <div class="player-avatar">
+                                <img src="../assets/avatars/avatar2.png" alt="Opponent">
+                            </div>
+                            <div class="player-info">
+                                <h4>BibleScholar42</h4>
+                                <p>Rank: #18</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="match-details">
+                        <div class="detail-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>15 Questions</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>20s per question</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-book"></i>
+                            <span>New Testament</span>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown-timer">
+                        <div class="timer-circle">
+                            <svg width="100" height="100">
+                                <circle cx="50" cy="50" r="45" stroke-width="8" fill="none"></circle>
+                            </svg>
+                            <span id="matchCountdown">5</span>
+                        </div>
+                        <p>Starting in <span id="countdownSeconds">5</span> seconds...</p>
+                    </div>
+                </div>
+                <div class="match-footer">
+                    <button class="btn-secondary" id="declineMatch">Decline</button>
+                    <button class="btn-primary" id="acceptMatch">Accept Match</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Bible Quiz Master</h4>
+                <p>Challenge other believers and test your biblical knowledge in real-time competitions.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Game Modes</h4>
+                <ul>
+                    <li><a href="#">Quick Match</a></li>
+                    <li><a href="#">Tournaments</a></li>
+                    <li><a href="#">Private Rooms</a></li>
+                    <li><a href="#">Team Battles</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="#">Global Leaderboard</a></li>
+                    <li><a href="#">Clubs & Groups</a></li>
+                    <li><a href="#">Community Events</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Live Stats</h4>
+                <div class="live-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="value">247</span>
+                            <span class="label">Playing Now</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-gamepad"></i>
+                        <div>
+                            <span class="value">42</span>
+                            <span class="label">Active Matches</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <span class="value">12</span>
+                            <span class="label">Tournaments Today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Bible Quiz Master. All rights reserved. | Real-time multiplayer powered by WebSockets</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="multiplayer.js"></script>
+</body>
+</html>

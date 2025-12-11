@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Quiz Master - Test Your Biblical Knowledge</title>
+    <meta name="description" content="Interactive Bible quiz with multiple game modes, AI feedback, and beautiful design">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="assets/icons/bible.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="pages/verse.html" class="nav-link"><i class="fas fa-verse"></i> Verse of Day</a>
+                <a href="pages/devotionals.html" class="nav-link"><i class="fas fa-book-open"></i> Devotionals</a>
+                <a href="pages/flashcards.html" class="nav-link"><i class="fas fa-layer-group"></i> Flashcards</a>
+                <a href="pages/multiplayer.html" class="nav-link"><i class="fas fa-users"></i> Multiplayer</a>
+                <a href="pages/profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+                <a href="pages/dashboard.html" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Test Your Biblical Knowledge</h1>
+                <p class="hero-subtitle">Join thousands of believers in deepening your understanding of God's Word through interactive quizzes and devotionals.</p>
+                
+                <div class="stats-bar">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="stat-value" id="onlineUsers">247</span>
+                            <span class="stat-label">Online Now</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <span class="stat-value">12,584</span>
+                            <span class="stat-label">Quizzes Today</span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <span class="stat-value">4.9</span>
+                            <span class="stat-label">Average Rating</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-primary btn-start-quiz">
+                    <i class="fas fa-play-circle"></i> Start Quick Quiz
+                </button>
+            </div>
+            
+            <div class="hero-image">
+                <div class="floating-card">
+                    <i class="fas fa-crown"></i>
+                    <h3>Top Player</h3>
+                    <p>Sarah M. - 2450 XP</p>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Fastest Answer</h3>
+                    <p>1.2s average</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Settings -->
+        <section class="quiz-settings" id="quizSettings">
+            <h2 class="section-title">Create Your Quiz</h2>
+            
+            <div class="settings-steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Mode</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Difficulty</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Topic</span>
+                </div>
+                <div class="step" data-step="4">
+                    <span class="step-number">4</span>
+                    <span class="step-label">Length</span>
+                </div>
+            </div>
+            
+            <!-- Step 1: Quiz Mode -->
+            <div class="settings-step active" id="step1">
+                <h3>Select Quiz Mode</h3>
+                <div class="mode-grid">
+                    <div class="mode-card" data-mode="standard">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Standard</h4>
+                        <p>Classic multiple choice</p>
+                    </div>
+                    <div class="mode-card" data-mode="timed">
+                        <i class="fas fa-clock"></i>
+                        <h4>Timed Challenge</h4>
+                        <p>Beat the clock</p>
+                    </div>
+                    <div class="mode-card" data-mode="survival">
+                        <i class="fas fa-heart"></i>
+                        <h4>Survival</h4>
+                        <p>3 lives, endless questions</p>
+                    </div>
+                    <div class="mode-card" data-mode="daily">
+                        <i class="fas fa-calendar-day"></i>
+                        <h4>Daily Challenge</h4>
+                        <p>Special daily quiz</p>
+                    </div>
+                    <div class="mode-card" data-mode="kids">
+                        <i class="fas fa-child"></i>
+                        <h4>Kids Mode</h4>
+                        <p>Simplified for children</p>
+                    </div>
+                    <div class="mode-card" data-mode="expert">
+                        <i class="fas fa-brain"></i>
+                        <h4>Expert Level</h4>
+                        <p>For theologians</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Difficulty -->
+            <div class="settings-step" id="step2">
+                <h3>Select Difficulty</h3>
+                <div class="difficulty-grid">
+                    <div class="difficulty-card" data-difficulty="mixed">
+                        <div class="diff-icon">🎲</div>
+                        <h4>Mixed</h4>
+                        <p>All difficulty levels</p>
+                    </div>
+                    <div class="difficulty-card" data-difficulty="easy">
+                        <div class="diff-icon">😊</div>
+                        <h4>Easy</h4>
+                        <p>Great for beginners</p>
+                    </div>
+                    <div class="difficulty-card" data-difficulty="medium">
+                        <div class="diff-icon">🤔</div>
+                        <h4>Medium</h4>
+                        <p>Regular challenge</p>
+                    </div>
+                    <div class="difficulty-card" data-difficulty="hard">
+                        <div class="diff-icon">💪</div>
+                        <h4>Hard</h4>
+                        <p>Test your knowledge</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Topic -->
+            <div class="settings-step" id="step3">
+                <h3>Select Topic</h3>
+                <div class="topic-grid">
+                    <div class="topic-card" data-topic="random">
+                        <i class="fas fa-random"></i>
+                        <span>Random Mix</span>
+                    </div>
+                    <div class="topic-card" data-topic="old-testament">
+                        <i class="fas fa-scroll"></i>
+                        <span>Old Testament</span>
+                    </div>
+                    <div class="topic-card" data-topic="new-testament">
+                        <i class="fas fa-book"></i>
+                        <span>New Testament</span>
+                    </div>
+                    <div class="topic-card" data-topic="gospels">
+                        <i class="fas fa-cross"></i>
+                        <span>The Gospels</span>
+                    </div>
+                    <div class="topic-card" data-topic="prophets">
+                        <i class="fas fa-fire"></i>
+                        <span>Prophets</span>
+                    </div>
+                    <div class="topic-card" data-topic="wisdom">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Wisdom Books</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Length -->
+            <div class="settings-step" id="step4">
+                <h3>Number of Questions</h3>
+                <div class="length-slider">
+                    <input type="range" min="5" max="50" value="15" class="slider" id="questionSlider">
+                    <div class="slider-value">
+                        <span id="questionCount">15</span> Questions
+                    </div>
+                    <div class="slider-options">
+                        <button class="btn-option" data-count="10">10</button>
+                        <button class="btn-option" data-count="20">20</button>
+                        <button class="btn-option" data-count="30">30</button>
+                        <button class="btn-option" data-count="50">50</button>
+                    </div>
+                </div>
+                <button class="btn-primary btn-start-custom" id="startCustomQuiz">
+                    <i class="fas fa-rocket"></i> Start Custom Quiz
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Content -->
+        <section class="featured-section">
+            <h2 class="section-title">Explore More</h2>
+            
+            <div class="featured-grid">
+                <a href="pages/verse.html" class="featured-card verse-card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-verse"></i> Verse of the Day</h3>
+                        <p class="verse-text">"For God so loved the world that he gave his one and only Son..."</p>
+                        <p class="verse-ref">John 3:16</p>
+                    </div>
+                </a>
+                
+                <a href="pages/devotionals.html" class="featured-card devotional-card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-book-open"></i> Daily Devotional</h3>
+                        <p>The Power of Prayer in Difficult Times</p>
+                        <span class="read-more">Read Now →</span>
+                    </div>
+                </a>
+                
+                <a href="pages/flashcards.html" class="featured-card flashcard-card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-layer-group"></i> Interactive Flashcards</h3>
+                        <p>Master 100+ key Bible verses and concepts</p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="pages/multiplayer.html" class="featured-card multiplayer-card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-users"></i> Live Multiplayer</h3>
+                        <p>Challenge other players in real-time</p>
+                        <div class="online-indicator">
+                            <span class="dot"></span>
+                            24 players online
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Recent Achievements -->
+        <section class="achievements-section">
+            <h2 class="section-title">Your Recent Achievements</h2>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Filled by JavaScript -->
+            </div>
+        </section>
+
+        <!-- AI Insights -->
+        <section class="ai-insights">
+            <div class="ai-header">
+                <i class="fas fa-robot"></i>
+                <h3>AI Study Insights</h3>
+            </div>
+            <div class="ai-content">
+                <p>Based on your performance, we recommend focusing on <strong>New Testament</strong> studies. Your accuracy in this area is 15% higher than average!</p>
+                <button class="btn-outline">
+                    <i class="fas fa-chart-line"></i> View Detailed Analysis
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Bible Quiz Master</h4>
+                <p>Deepen your biblical knowledge through interactive learning and community engagement.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="pages/verse.html">Verse of the Day</a></li>
+                    <li><a href="pages/devotionals.html">Devotionals</a></li>
+                    <li><a href="pages/flashcards.html">Flashcards</a></li>
+                    <li><a href="pages/support.html">Support Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="pages/testimonials.html">Testimonials</a></li>
+                    <li><a href="#">FAQs/Help</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get daily verses and quiz updates</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email">
+                    <button class="btn-subscribe">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Bible Quiz Master. All rights reserved. | Designed with ❤️ for believers worldwide</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="quiz.js"></script>
+    
+    <!-- Register Service Worker for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        }
+    </script>
+</body>
+</html> 
+
+

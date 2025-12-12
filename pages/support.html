@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Bible Quiz Master - Contribute & Get Help</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages/assets/style/support.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="verse.html" class="nav-link"><i class="fas fa-verse"></i> Verse of Day</a>
+                <a href="devotionals.html" class="nav-link"><i class="fas fa-book-open"></i> Devotionals</a>
+                <a href="flashcards.html" class="nav-link"><i class="fas fa-layer-group"></i> Flashcards</a>
+                <a href="multiplayer.html" class="nav-link"><i class="fas fa-users"></i> Multiplayer</a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+                <a href="support.html" class="nav-link active"><i class="fas fa-hands-helping"></i> Support</a>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="../assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container support-container">
+        <div class="support-header">
+            <h1 class="page-title">Support Bible Quiz Master</h1>
+            <p class="page-subtitle">Help us continue providing free, high-quality Bible education to believers worldwide.</p>
+        </div>
+
+        <div class="support-content">
+            <!-- Financial Support -->
+            <div class="support-section donation-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-donate"></i> Financial Support</h2>
+                    <p>Your donations help cover server costs, development, and content creation.</p>
+                </div>
+                
+                <div class="donation-options">
+                    <div class="donation-card">
+                        <div class="donation-header">
+                            <i class="fas fa-coffee"></i>
+                            <h3>Buy Us a Coffee</h3>
+                        </div>
+                        <p>Support our work with a small one-time donation.</p>
+                        <div class="donation-amounts">
+                            <button class="amount-btn" data-amount="5">$5</button>
+                            <button class="amount-btn" data-amount="10">$10</button>
+                            <button class="amount-btn" data-amount="25">$25</button>
+                            <button class="amount-btn custom">Custom</button>
+                        </div>
+                        <button class="btn-donate" data-type="one-time">
+                            <i class="fas fa-heart"></i> Donate Now
+                        </button>
+                    </div>
+                    
+                    <div class="donation-card featured">
+                        <div class="donation-header">
+                            <i class="fas fa-star"></i>
+                            <h3>Monthly Supporter</h3>
+                            <span class="featured-badge">Most Popular</span>
+                        </div>
+                        <p>Become a monthly supporter and get exclusive benefits.</p>
+                        <div class="monthly-amount">
+                            <span class="amount">$10</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check"></i> Supporter badge on profile</li>
+                            <li><i class="fas fa-check"></i> Early access to new features</li>
+                            <li><i class="fas fa-check"></i> Custom avatar frames</li>
+                            <li><i class="fas fa-check"></i> Priority support</li>
+                        </ul>
+                        <button class="btn-donate" data-type="monthly">
+                            <i class="fas fa-crown"></i> Become a Supporter
+                        </button>
+                    </div>
+                    
+                    <div class="donation-card">
+                        <div class="donation-header">
+                            <i class="fas fa-church"></i>
+                            <h3>Church Partnership</h3>
+                        </div>
+                        <p>For churches and organizations wanting to support our mission.</p>
+                        <div class="partnership-benefits">
+                            <p><i class="fas fa-check"></i> Custom branded version for your church</p>
+                            <p><i class="fas fa-check"></i> Dedicated support</p>
+                            <p><i class="fas fa-check"></i> Usage analytics for your group</p>
+                        </div>
+                        <button class="btn-donate" data-type="partnership">
+                            <i class="fas fa-handshake"></i> Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- PayPal Integration -->
+                <div class="payment-section">
+                    <h3>Make a Donation via PayPal</h3>
+                    <div class="paypal-button" id="paypal-button-container"></div>
+                    <p class="payment-note">Secure payment processed by PayPal. We never store your payment information.</p>
+                </div>
+            </div>
+
+            <!-- Other Ways to Support -->
+            <div class="support-section other-ways-section">
+                <h2 class="section-title">Other Ways to Support</h2>
+                
+                <div class="support-options-grid">
+                    <div class="support-option">
+                        <div class="option-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h4>Share with Friends</h4>
+                        <p>Spread the word about Bible Quiz Master on social media and in your community.</p>
+                        <div class="share-buttons">
+                            <button class="btn-share" data-platform="facebook">
+                                <i class="fab fa-facebook"></i>
+                            </button>
+                            <button class="btn-share" data-platform="twitter">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button class="btn-share" data-platform="whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                            <button class="btn-share" data-platform="email">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="support-option">
+                        <div class="option-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Rate & Review</h4>
+                        <p>Leave a positive review on app stores and review websites.</p>
+                        <div class="store-buttons">
+                            <button class="btn-store" data-store="appstore">
+                                <i class="fab fa-app-store"></i> App Store
+                            </button>
+                            <button class="btn-store" data-store="playstore">
+                                <i class="fab fa-google-play"></i> Google Play
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="support-option">
+                        <div class="option-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4>Report Bugs</h4>
+                        <p>Help us improve by reporting any issues or bugs you encounter.</p>
+                        <button class="btn-report" id="reportBugBtn">
+                            <i class="fas fa-bug"></i> Report a Bug
+                        </button>
+                    </div>
+                    
+                    <div class="support-option">
+                        <div class="option-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Suggest Features</h4>
+                        <p>Share your ideas for new features or improvements.</p>
+                        <button class="btn-suggest" id="suggestFeatureBtn">
+                            <i class="fas fa-lightbulb"></i> Suggest a Feature
+                        </button>
+                    </div>
+                    
+                    <div class="support-option">
+                        <div class="option-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h4>Volunteer</h4>
+                        <p>Contribute your skills in writing, translation, or development.</p>
+                        <button class="btn-volunteer" id="volunteerBtn">
+                            <i class="fas fa-handshake"></i> Volunteer
+                        </button>
+                    </div>
+                    
+                    <div class="support-option">
+                        <div class="option-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <h4>Pray for Us</h4>
+                        <p>Pray for wisdom, resources, and impact as we serve the global church.</p>
+                        <button class="btn-prayer" id="prayerRequestBtn">
+                            <i class="fas fa-pray"></i> Share Prayer Request
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Transparency -->
+            <div class="support-section transparency-section">
+                <h2 class="section-title">Financial Transparency</h2>
+                <p>We believe in being open about how donations are used to further our mission.</p>
+                
+                <div class="transparency-grid">
+                    <div class="transparency-card">
+                        <h4>Where Your Money Goes</h4>
+                        <div class="expense-chart">
+                            <div class="expense-item">
+                                <span class="expense-label">Server Costs</span>
+                                <div class="expense-bar">
+                                    <div class="bar-fill" style="width: 40%"></div>
+                                </div>
+                                <span class="expense-percent">40%</span>
+                            </div>
+                            <div class="expense-item">
+                                <span class="expense-label">Content Creation</span>
+                                <div class="expense-bar">
+                                    <div class="bar-fill" style="width: 30%"></div>
+                                </div>
+                                <span class="expense-percent">30%</span>
+                            </div>
+                            <div class="expense-item">
+                                <span class="expense-label">Development</span>
+                                <div class="expense-bar">
+                                    <div class="bar-fill" style="width: 20%"></div>
+                                </div>
+                                <span class="expense-percent">20%</span>
+                            </div>
+                            <div class="expense-item">
+                                <span class="expense-label">Outreach</span>
+                                <div class="expense-bar">
+                                    <div class="bar-fill" style="width: 10%"></div>
+                                </div>
+                                <span class="expense-percent">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="transparency-card">
+                        <h4>Our Impact</h4>
+                        <div class="impact-stats">
+                            <div class="impact-item">
+                                <i class="fas fa-users"></i>
+                                <div>
+                                    <span class="impact-value">12,584</span>
+                                    <span class="impact-label">Active Users</span>
+                                </div>
+                            </div>
+                            <div class="impact-item">
+                                <i class="fas fa-globe"></i>
+                                <div>
+                                    <span class="impact-value">84</span>
+                                    <span class="impact-label">Countries</span>
+                                </div>
+                            </div>
+                            <div class="impact-item">
+                                <i class="fas fa-book"></i>
+                                <div>
+                                    <span class="impact-value">245,872</span>
+                                    <span class="impact-label">Quizzes Taken</span>
+                                </div>
+                            </div>
+                            <div class="impact-item">
+                                <i class="fas fa-church"></i>
+                                <div>
+                                    <span class="impact-value">500+</span>
+                                    <span class="impact-label">Churches Using</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ & Help -->
+            <div class="support-section faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is Bible Quiz Master really free?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! All core features are completely free and will remain free. Donations help us cover costs and develop new features, but we're committed to keeping the essential Bible study tools accessible to everyone.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How are donations used?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Donations are used for: server hosting costs, content creation (questions, devotionals), software development, and outreach to make Bible Quiz Master available in more languages and regions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I get a receipt for my donation?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! PayPal provides automatic receipts for all transactions. For larger donations or church partnerships, we can provide additional documentation upon request.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How do I cancel my monthly donation?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>You can cancel your monthly donation at any time through your PayPal account settings. There are no cancellation fees or penalties.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can my church get a custom version?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! We offer custom branded versions for churches and organizations. Contact us through the church partnership option above to learn more.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How can I volunteer?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We welcome volunteers in areas like: content writing, translation, testing, and community moderation. Click the "Volunteer" button above to express your interest.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact & Support Form -->
+            <div class="support-section contact-section">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <h2><i class="fas fa-headset"></i> Need Help?</h2>
+                        <p>Contact our support team for assistance or questions.</p>
+                    </div>
+                    
+                    <form id="supportForm">
+                        <div class="form-group">
+                            <label>What can we help you with?</label>
+                            <select id="supportCategory" required>
+                                <option value="">Select a category</option>
+                                <option value="technical">Technical Issue</option>
+                                <option value="account">Account Problem</option>
+                                <option value="content">Content Question</option>
+                                <option value="donation">Donation Inquiry</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" id="supportName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Email</label>
+                                <input type="email" id="supportEmail" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" id="supportSubject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="supportMessage" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Attachments (Optional)</label>
+                            <div class="file-upload">
+                                <input type="file" id="supportAttachment" multiple style="display: none;">
+                                <button type="button" class="btn-outline" id="attachFilesBtn">
+                                    <i class="fas fa-paperclip"></i> Attach Files
+                                </button>
+                                <div class="file-list" id="fileList"></div>
+                            </div>
+                            <p class="upload-hint">Max file size: 5MB each. Supported: PDF, JPG, PNG, TXT</p>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bug Report Modal -->
+        <div class="modal" id="bugReportModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-bug"></i> Report a Bug</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="bugReportForm">
+                        <div class="form-group">
+                            <label>What were you doing when the bug occurred?</label>
+                            <textarea id="bugDescription" placeholder="Describe what you were doing..." rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>What happened?</label>
+                            <textarea id="bugWhatHappened" placeholder="Describe what went wrong..." rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>What did you expect to happen?</label>
+                            <textarea id="bugExpected" placeholder="Describe what should have happened..." rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Device Type</label>
+                                <select id="bugDevice">
+                                    <option value="">Select device</option>
+                                    <option value="desktop">Desktop/Laptop</option>
+                                    <option value="mobile">Mobile Phone</option>
+                                    <option value="tablet">Tablet</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Browser</label>
+                                <select id="bugBrowser">
+                                    <option value="">Select browser</option>
+                                    <option value="chrome">Chrome</option>
+                                    <option value="firefox">Firefox</option>
+                                    <option value="safari">Safari</option>
+                                    <option value="edge">Edge</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Screenshots (Optional)</label>
+                            <input type="file" id="bugScreenshots" accept="image/*" multiple>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancelBugBtn">Cancel</button>
+                    <button class="btn-primary" id="submitBugBtn">
+                        <i class="fas fa-bug"></i> Submit Bug Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Suggestion Modal -->
+        <div class="modal" id="featureModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-lightbulb"></i> Suggest a Feature</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="featureSuggestionForm">
+                        <div class="form-group">
+                            <label>Feature Title</label>
+                            <input type="text" id="featureTitle" placeholder="Brief title for your suggestion" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="featureCategory" required>
+                                <option value="">Select category</option>
+                                <option value="quiz">Quiz Features</option>
+                                <option value="flashcards">Flashcards</option>
+                                <option value="multiplayer">Multiplayer</option>
+                                <option value="ui">User Interface</option>
+                                <option value="content">New Content</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Detailed Description</label>
+                            <textarea id="featureDescription" placeholder="Describe your feature idea in detail..." rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Why is this feature important?</label>
+                            <textarea id="featureImportance" placeholder="How would this feature help you or other users?" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Your Email (Optional - for follow-up)</label>
+                            <input type="email" id="featureEmail" placeholder="email@example.com">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancelFeatureBtn">Cancel</button>
+                    <button class="btn-primary" id="submitFeatureBtn">
+                        <i class="fas fa-lightbulb"></i> Submit Suggestion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Bible Quiz Master</h4>
+                <p>A ministry dedicated to making Bible study engaging and accessible for everyone.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support Resources</h4>
+                <ul>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#contact">Contact Support</a></li>
+                    <li><a href="#bug">Report Bugs</a></li>
+                    <li><a href="#feature">Suggest Features</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Financial Info</h4>
+                <ul>
+                    <li><a href="#transparency">Financial Transparency</a></li>
+                    <li><a href="#donate">Donation Options</a></li>
+                    <li><a href="#partnership">Church Partnerships</a></li>
+                    <li><a href="#volunteer">Volunteer Opportunities</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> support@biblequizmaster.org</p>
+                    <p><i class="fas fa-pray"></i> Prayer requests welcome</p>
+                    <p><i class="fas fa-heart"></i> A 501(c)(3) non-profit ministry</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Bible Quiz Master. All rights reserved. | A ministry serving the global church</p>
+            <p class="disclaimer">Bible Quiz Master is a registered 501(c)(3) non-profit organization. Donations are tax-deductible.</p>
+        </div>
+    </footer>
+
+    <!-- PayPal SDK (Demo - would need real integration) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="support.js"></script>
+</body>
+</html> 
+

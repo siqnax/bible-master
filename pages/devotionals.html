@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Devotionals - Bible Study & Reflection</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages/assets/style/devotionals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="verse.html" class="nav-link"><i class="fas fa-verse"></i> Verse of Day</a>
+                <a href="devotionals.html" class="nav-link active"><i class="fas fa-book-open"></i> Devotionals</a>
+                <a href="flashcards.html" class="nav-link"><i class="fas fa-layer-group"></i> Flashcards</a>
+                <a href="multiplayer.html" class="nav-link"><i class="fas fa-users"></i> Multiplayer</a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            </div>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="../assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container devotionals-container">
+        <div class="devotionals-header">
+            <h1 class="page-title">Daily Devotionals</h1>
+            <p class="page-subtitle">Nourish your soul with daily Bible readings and reflections. Grow deeper in your faith through structured study.</p>
+            
+            <div class="header-stats">
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <div>
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <span class="stat-value">42</span>
+                        <span class="stat-label">Devotionals Read</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="stat-value">15min</span>
+                        <span class="stat-label">Avg. Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Devotional -->
+        <div class="daily-devotional">
+            <div class="daily-header">
+                <h2>Today's Devotional</h2>
+                <span class="date-badge">October 26, 2023</span>
+            </div>
+            
+            <div class="devotional-card featured">
+                <div class="devotional-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-pray"></i>
+                    </div>
+                </div>
+                <div class="devotional-content">
+                    <div class="devotional-tags">
+                        <span class="tag prayer">Prayer</span>
+                        <span class="tag faith">Faith</span>
+                        <span class="tag daily">Daily Living</span>
+                    </div>
+                    <h3 class="devotional-title">The Power of Persistent Prayer</h3>
+                    <div class="devotional-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-clock"></i> 5 min read
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-book"></i> Luke 18:1-8
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-user"></i> Rev. Michael Thompson
+                        </span>
+                    </div>
+                    
+                    <div class="devotional-excerpt">
+                        <p>In the parable of the persistent widow, Jesus teaches us about persevering in prayer. The widow's continual appeals to the unjust judge eventually led to justice. How much more will our loving Father answer His children who cry out to Him day and night?</p>
+                    </div>
+                    
+                    <div class="devotional-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-book-open"></i> Read Full Devotional
+                        </button>
+                        <button class="btn-outline">
+                            <i class="fas fa-bookmark"></i> Save for Later
+                        </button>
+                        <button class="btn-outline">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Devotional Topics -->
+        <div class="topics-section">
+            <h3 class="section-title">Browse by Topic</h3>
+            <div class="topics-grid">
+                <a href="#" class="topic-card" data-topic="prayer">
+                    <div class="topic-icon">
+                        <i class="fas fa-pray"></i>
+                    </div>
+                    <h4>Prayer</h4>
+                    <p>Deepen your prayer life</p>
+                    <span class="topic-count">15 devotionals</span>
+                </a>
+                
+                <a href="#" class="topic-card" data-topic="faith">
+                    <div class="topic-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h4>Faith</h4>
+                    <p>Growing in trust</p>
+                    <span class="topic-count">12 devotionals</span>
+                </a>
+                
+                <a href="#" class="topic-card" data-topic="love">
+                    <div class="topic-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Love</h4>
+                    <p>God's unconditional love</p>
+                    <span class="topic-count">10 devotionals</span>
+                </a>
+                
+                <a href="#" class="topic-card" data-topic="hope">
+                    <div class="topic-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Hope</h4>
+                    <p>Finding hope in Christ</p>
+                    <span class="topic-count">8 devotionals</span>
+                </a>
+                
+                <a href="#" class="topic-card" data-topic="forgiveness">
+                    <div class="topic-icon">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h4>Forgiveness</h4>
+                    <p>Receiving and giving</p>
+                    <span class="topic-count">7 devotionals</span>
+                </a>
+                
+                <a href="#" class="topic-card" data-topic="peace">
+                    <div class="topic-icon">
+                        <i class="fas fa-peace"></i>
+                    </div>
+                    <h4>Peace</h4>
+                    <p>God's peace in turmoil</p>
+                    <span class="topic-count">6 devotionals</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 30-Day Reading Plan -->
+        <div class="reading-plan-section">
+            <div class="section-header">
+                <h3>30-Day Bible Reading Plan</h3>
+                <button class="btn-outline">
+                    <i class="fas fa-download"></i> Download PDF
+                </button>
+            </div>
+            
+            <div class="plan-progress">
+                <div class="progress-info">
+                    <span class="progress-label">Current Progress</span>
+                    <span class="progress-value">Day 12 of 30</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="bar-fill" style="width: 40%"></div>
+                </div>
+            </div>
+            
+            <div class="plan-grid" id="readingPlan">
+                <!-- Generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Recent Devotionals -->
+        <div class="recent-devotionals">
+            <h3 class="section-title">Recent Devotionals</h3>
+            <div class="devotionals-grid" id="recentDevotionals">
+                <!-- Generated by JavaScript -->
+            </div>
+            
+            <div class="load-more">
+                <button class="btn-outline" id="loadMoreDevotionals">
+                    <i class="fas fa-plus"></i> Load More Devotionals
+                </button>
+            </div>
+        </div>
+
+        <!-- Study Tools -->
+        <div class="tools-section">
+            <h3 class="section-title">Study Tools</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-highlighter"></i>
+                    </div>
+                    <h4>Verse Highlighter</h4>
+                    <p>Highlight and save key verses from devotionals</p>
+                    <button class="btn-tool">
+                        <i class="fas fa-play"></i> Try Now
+                    </button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4>Reflection Journal</h4>
+                    <p>Write personal reflections on each devotional</p>
+                    <button class="btn-tool">
+                        <i class="fas fa-edit"></i> Open Journal
+                    </button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Group Study</h4>
+                    <p>Discuss devotionals with a small group</p>
+                    <button class="btn-tool">
+                        <i class="fas fa-user-plus"></i> Join Group
+                    </button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h4>Daily Reminders</h4>
+                    <p>Get notified for your daily devotional time</p>
+                    <button class="btn-tool">
+                        <i class="fas fa-bell"></i> Set Reminder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Bible Quiz Master</h4>
+                <p>Grow deeper in faith through daily devotionals and Bible study.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Devotional Topics</h4>
+                <ul>
+                    <li><a href="#prayer">Prayer</a></li>
+                    <li><a href="#faith">Faith</a></li>
+                    <li><a href="#love">Love</a></li>
+                    <li><a href="#hope">Hope</a></li>
+                    <li><a href="#forgiveness">Forgiveness</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Study Plans</h4>
+                <ul>
+                    <li><a href="#30day">30-Day Reading Plan</a></li>
+                    <li><a href="#gospels">Gospels in 30 Days</a></li>
+                    <li><a href="#psalms">Psalms in 90 Days</a></li>
+                    <li><a href="#newtestament">NT in 6 Months</a></li>
+                    <li><a href="#oneyear">One-Year Bible Plan</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Today's Reading</h4>
+                <div class="todays-reading">
+                    <div class="reading-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <span class="reading-ref">Luke 18:1-8</span>
+                            <span class="reading-title">The Persistent Widow</span>
+                        </div>
+                    </div>
+                    <button class="btn-outline btn-sm">
+                        <i class="fas fa-check"></i> Mark as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 Bible Quiz Master. All rights reserved. | Daily devotionals to strengthen your walk with God</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="devotionals.js"></script>
+</body>
+</html>
+

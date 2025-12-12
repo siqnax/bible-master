@@ -1,0 +1,586 @@
+// Flashcards System
+class FlashcardsSystem {
+    constructor() {
+        this.cards = [];
+        this.currentCardIndex = 0;
+        this.categories = [];
+        this.filteredCards = [];
+        this.currentCategory = 'all';
+        
+        this.initialize();
+    }
+    
+    async initialize() {
+        await this.loadFlashcards();
+        this.setupUI();
+        this.setupEventListeners();
+        this.displayCards();
+        this.updateStats();
+    }
+    
+    async loadFlashcards() {
+        try {
+            // Try to load from local storage first
+            const savedCards = localStorage.getItem('flashcards');
+            if (savedCards) {
+                this.cards = JSON.parse(savedCards);
+            } else {
+                // Load default cards from data file
+                const response = await fetch('../data/questions.json');
+                const questions = await response.json();
+                this.cards = this.convertQuestionsToFlashcards(questions);
+                this.saveFlashcards();
+            }
+            
+            // Initialize categories
+            this.categories = this.extractCategories();
+        } catch (error) {
+            console.error('Error loading flashcards:', error);
+            this.cards = this.getDefaultFlashcards();
+            this.saveFlashcards();
+        }
+    }
+    
+    convertQuestionsToFlashcards(questions) {
+        return questions.map((question, index) => ({
+            id: `card-${index}`,
+            front: question.question,
+            back: question.correctAnswer,
+            explanation: question.explanations ? Object.values(question.explanations).join(' ') : '',
+            reference: question.reference,
+            category: question.topic[0] || 'general',
+            difficulty: question.difficulty,
+            status: 'new', // new, reviewing, mastered
+            created: new Date().toISOString(),
+            lastReviewed: null,
+            nextReview: null,
+            hint: question.hints ? question.hints[0] : '',
+            mastery: 0 // 0-100
+        }));
+    }
+    
+    getDefaultFlashcards() {
+        return [
+            {
+                id: 'card-1',
+                front: 'What is the complete reference and text of John 3:16?',
+                back: 'For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.',
+                explanation: 'This verse summarizes the gospel: God\'s love motivated Him to send Jesus so that believers can have eternal life through faith.',
+                reference: 'John 3:16',
+                category: 'verses',
+                difficulty: 'easy',
+                status: 'mastered',
+                created: '2023-10-01',
+                lastReviewed: '2023-10-25',
+                nextReview: '2023-11-01',
+                hint: 'This is one of the most quoted verses about salvation',
+                mastery: 95
+            },
+            {
+                id: 'card-2',
+                front: 'Who was the first man created by God?',
+                back: 'Adam',
+                explanation: 'Adam was created by God from the dust of the ground and was the first human being.',
+                reference: 'Genesis 2:7',
+                category: 'characters',
+                difficulty: 'easy',
+                status: 'mastered',
+                created: '2023-10-01',
+                lastReviewed: '2023-10-24',
+                nextReview: '2023-10-31',
+                hint: 'Think about the creation story',
+                mastery: 90
+            }
+        ];
+    }
+    
+    extractCategories() {
+        const categories = new Set(['all']);
+        this.cards.forEach(card => {
+            categories.add(card.category);
+        });
+        return Array.from(categories);
+    }
+    
+    setupUI() {
+        // Set up flip functionality
+        const flashcard = document.getElementById('currentCard');
+        const flipButtons = document.querySelectorAll('.btn-flip');
+        
+        flashcard.addEventListener('click', () => this.flipCard());
+        flipButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.flipCard();
+            });
+        });
+        
+        // Set up mastery buttons
+        document.querySelectorAll('.btn-mastery').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const difficulty = e.currentTarget.classList.contains('easy') ? 'easy' :
+                                 e.currentTarget.classList.contains('medium') ? 'medium' : 'hard';
+                this.updateMastery(difficulty);
+            });
+        });
+    }
+    
+    setupEventListeners() {
+        // Category selection
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const category = e.currentTarget.dataset.category;
+                this.selectCategory(category);
+            });
+        });
+        
+        // Navigation
+        document.getElementById('prevCard')?.addEventListener('click', () => this.previousCard());
+        document.getElementById('nextCard')?.addEventListener('click', () => this.nextCard());
+        document.getElementById('shuffleBtn')?.addEventListener('click', () => this.shuffleCards());
+        
+        // Filters
+        document.getElementById('statusFilter')?.addEventListener('change', (e) => this.filterCards());
+        document.getElementById('difficultyFilter')?.addEventListener('change', (e) => this.filterCards());
+        
+        // Custom card creation
+        document.getElementById('addCardBtn')?.addEventListener('click', () => this.openCustomCardModal());
+        document.getElementById('saveCardBtn')?.addEventListener('click', () => this.saveCustomCard());
+        document.getElementById('cancelCardBtn')?.addEventListener('click', () => this.closeCustomCardModal());
+        document.querySelector('.modal-close')?.addEventListener('click', () => this.closeCustomCardModal());
+        
+        // Export
+        document.getElementById('exportCardsBtn')?.addEventListener('click', () => this.exportFlashcards());
+    }
+    
+    displayCards() {
+        this.filterCards();
+        this.updateCurrentCard();
+        this.updateCardList();
+        this.updateProgress();
+    }
+    
+    filterCards() {
+        const statusFilter = document.getElementById('statusFilter').value;
+        const difficultyFilter = document.getElementById('difficultyFilter').value;
+        
+        this.filteredCards = this.cards.filter(card => {
+            // Filter by category
+            if (this.currentCategory !== 'all' && card.category !== this.currentCategory) {
+                return false;
+            }
+            
+            // Filter by status
+            if (statusFilter !== 'all' && card.status !== statusFilter) {
+                return false;
+            }
+            
+            // Filter by difficulty
+            if (difficultyFilter !== 'all' && card.difficulty !== difficultyFilter) {
+                return false;
+            }
+            
+            return true;
+        });
+        
+        // Update counts
+        document.getElementById('totalCards').textContent = this.filteredCards.length;
+    }
+    
+    updateCurrentCard() {
+        if (this.filteredCards.length === 0) {
+            this.showNoCardsMessage();
+            return;
+        }
+        
+        if (this.currentCardIndex >= this.filteredCards.length) {
+            this.currentCardIndex = 0;
+        }
+        
+        const card = this.filteredCards[this.currentCardIndex];
+        const flashcard = document.getElementById('currentCard');
+        
+        // Reset to front
+        flashcard.classList.remove('flipped');
+        
+        // Update card front
+        const front = flashcard.querySelector('.card-front');
+        front.querySelector('.card-topic').textContent = this.getCategoryName(card.category);
+        front.querySelector('.card-difficulty').textContent = card.difficulty;
+        front.querySelector('.card-difficulty').className = `card-difficulty ${card.difficulty}`;
+        front.querySelector('.card-question').textContent = card.front;
+        front.querySelector('.card-hint span').textContent = card.hint || 'Click to flip card';
+        front.querySelector('.card-status').textContent = card.status;
+        front.querySelector('.card-status').className = `card-status ${card.status}`;
+        
+        // Update card back
+        const back = flashcard.querySelector('.card-back');
+        back.querySelector('.card-reference').textContent = card.reference;
+        back.querySelector('.verse-text').textContent = card.back;
+        back.querySelector('.verse-explanation').textContent = card.explanation;
+        
+        // Update navigation
+        document.getElementById('currentCardNum').textContent = this.currentCardIndex + 1;
+        
+        // Update mastery buttons
+        this.updateMasteryButtons(card.mastery);
+    }
+    
+    updateCardList() {
+        const list = document.getElementById('cardsList');
+        if (!list) return;
+        
+        list.innerHTML = '';
+        
+        this.filteredCards.forEach((card, index) => {
+            const item = document.createElement('div');
+            item.className = `card-item ${index === this.currentCardIndex ? 'active' : ''}`;
+            item.dataset.index = index;
+            item.innerHTML = `
+                <div class="card-preview">${card.front.substring(0, 40)}...</div>
+                <span class="card-status-badge ${card.status}">${card.status}</span>
+            `;
+            
+            item.addEventListener('click', () => {
+                this.currentCardIndex = index;
+                this.updateCurrentCard();
+                this.updateCardList();
+            });
+            
+            list.appendChild(item);
+        });
+    }
+    
+    updateProgress() {
+        const totalCards = this.cards.length;
+        const masteredCards = this.cards.filter(card => card.status === 'mastered').length;
+        const reviewingCards = this.cards.filter(card => card.status === 'reviewing').length;
+        const newCards = this.cards.filter(card => card.status === 'new').length;
+        
+        // Update stats
+        document.getElementById('masteredCount').textContent = masteredCards;
+        document.getElementById('reviewingCount').textContent = reviewingCards;
+        document.getElementById('newCount').textContent = newCards;
+        
+        // Update progress bar
+        const progress = totalCards > 0 ? Math.round((masteredCards / totalCards) * 100) : 0;
+        const progressBar = document.getElementById('deckProgress');
+        if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // Update labels
+        const labels = document.querySelector('.progress-labels');
+        if (labels) {
+            labels.querySelector('span:first-child').textContent = `${progress}% Complete`;
+            labels.querySelector('span:last-child').textContent = `${masteredCards}/${totalCards} cards`;
+        }
+    }
+    
+    flipCard() {
+        const flashcard = document.getElementById('currentCard');
+        flashcard.classList.toggle('flipped');
+    }
+    
+    updateMastery(difficulty) {
+        if (this.filteredCards.length === 0) return;
+        
+        const card = this.filteredCards[this.currentCardIndex];
+        
+        // Update mastery based on difficulty
+        let masteryChange = 0;
+        switch(difficulty) {
+            case 'easy':
+                masteryChange = 30;
+                card.status = 'mastered';
+                break;
+            case 'medium':
+                masteryChange = 15;
+                card.status = 'reviewing';
+                break;
+            case 'hard':
+                masteryChange = 5;
+                card.status = 'reviewing';
+                break;
+        }
+        
+        // Update mastery score
+        card.mastery = Math.min(100, card.mastery + masteryChange);
+        card.lastReviewed = new Date().toISOString();
+        
+        // Calculate next review date using spaced repetition
+        const daysUntilNextReview = this.calculateNextReview(difficulty, card.mastery);
+        const nextReview = new Date();
+        nextReview.setDate(nextReview.getDate() + daysUntilNextReview);
+        card.nextReview = nextReview.toISOString();
+        
+        // Save changes
+        this.saveFlashcards();
+        
+        // Move to next card
+        this.nextCard();
+        
+        // Update display
+        this.updateStats();
+        
+        // Show feedback
+        this.showMasteryFeedback(difficulty);
+    }
+    
+    calculateNextReview(difficulty, currentMastery) {
+        // Simple spaced repetition algorithm
+        if (currentMastery >= 90) return 30; // Mastered: review in 30 days
+        if (difficulty === 'easy') return 7;
+        if (difficulty === 'medium') return 3;
+        return 1; // Hard: review tomorrow
+    }
+    
+    updateMasteryButtons(currentMastery) {
+        const buttons = document.querySelectorAll('.btn-mastery');
+        buttons.forEach(btn => {
+            const difficulty = btn.classList.contains('easy') ? 'easy' :
+                             btn.classList.contains('medium') ? 'medium' : 'hard';
+            
+            // Update button text with expected mastery gain
+            let gain = 0;
+            switch(difficulty) {
+                case 'easy': gain = 30; break;
+                case 'medium': gain = 15; break;
+                case 'hard': gain = 5; break;
+            }
+            
+            const newMastery = Math.min(100, currentMastery + gain);
+            btn.innerHTML = `<i class="fas fa-thumbs-up"></i> Easy (${newMastery}%)`;
+        });
+    }
+    
+    selectCategory(category) {
+        this.currentCategory = category;
+        
+        // Update UI
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.category === category) {
+                btn.classList.add('active');
+            }
+        });
+        
+        document.getElementById('currentCategory').textContent = 
+            this.getCategoryName(category);
+        
+        // Update cards
+        this.currentCardIndex = 0;
+        this.displayCards();
+    }
+    
+    getCategoryName(category) {
+        const names = {
+            'all': 'All Cards',
+            'verses': 'Memory Verses',
+            'characters': 'Bible Characters',
+            'books': 'Books of Bible',
+            'doctrine': 'Christian Doctrine',
+            'custom': 'Custom Cards'
+        };
+        
+        return names[category] || category;
+    }
+    
+    previousCard() {
+        if (this.filteredCards.length === 0) return;
+        
+        this.currentCardIndex--;
+        if (this.currentCardIndex < 0) {
+            this.currentCardIndex = this.filteredCards.length - 1;
+        }
+        
+        this.updateCurrentCard();
+        this.updateCardList();
+    }
+    
+    nextCard() {
+        if (this.filteredCards.length === 0) return;
+        
+        this.currentCardIndex++;
+        if (this.currentCardIndex >= this.filteredCards.length) {
+            this.currentCardIndex = 0;
+        }
+        
+        this.updateCurrentCard();
+        this.updateCardList();
+    }
+    
+    shuffleCards() {
+        // Shuffle filtered cards
+        for (let i = this.filteredCards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.filteredCards[i], this.filteredCards[j]] = [this.filteredCards[j], this.filteredCards[i]];
+        }
+        
+        this.currentCardIndex = 0;
+        this.updateCurrentCard();
+        this.updateCardList();
+        
+        // Show notification
+        this.showNotification('Cards shuffled!', 'info');
+    }
+    
+    openCustomCardModal() {
+        document.getElementById('customCardModal').classList.add('active');
+    }
+    
+    closeCustomCardModal() {
+        document.getElementById('customCardModal').classList.remove('active');
+        this.resetCustomCardForm();
+    }
+    
+    resetCustomCardForm() {
+        document.getElementById('customCardForm').reset();
+    }
+    
+    saveCustomCard() {
+        const front = document.getElementById('cardFront').value.trim();
+        const back = document.getElementById('cardBack').value.trim();
+        const category = document.getElementById('cardCategory').value;
+        const difficulty = document.getElementById('cardDifficulty').value;
+        const reference = document.getElementById('cardReference').value.trim();
+        const hint = document.getElementById('cardHint').value.trim();
+        
+        if (!front || !back) {
+            this.showNotification('Please fill in both front and back of the card', 'error');
+            return;
+        }
+        
+        const newCard = {
+            id: `custom-${Date.now()}`,
+            front,
+            back,
+            explanation: '',
+            reference: reference || 'Custom Card',
+            category,
+            difficulty,
+            status: 'new',
+            created: new Date().toISOString(),
+            lastReviewed: null,
+            nextReview: null,
+            hint: hint || '',
+            mastery: 0,
+            custom: true
+        };
+        
+        this.cards.push(newCard);
+        this.saveFlashcards();
+        
+        // Switch to custom category
+        this.selectCategory('custom');
+        
+        // Close modal and reset form
+        this.closeCustomCardModal();
+        
+        // Show success message
+        this.showNotification('Custom card created successfully!', 'success');
+    }
+    
+    exportFlashcards() {
+        const exportData = {
+            cards: this.cards,
+            exportDate: new Date().toISOString(),
+            version: '1.0'
+        };
+        
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const exportFileDefaultName = `bible-flashcards-${new Date().toISOString().split('T')[0]}.json`;
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        
+        this.showNotification('Flashcards exported successfully!', 'success');
+    }
+    
+    saveFlashcards() {
+        try {
+            localStorage.setItem('flashcards', JSON.stringify(this.cards));
+            return true;
+        } catch (error) {
+            console.error('Error saving flashcards:', error);
+            return false;
+        }
+    }
+    
+    updateStats() {
+        // Update streak from user data
+        const userData = JSON.parse(localStorage.getItem('bibleQuizUser') || '{}');
+        const streak = userData.streak || 0;
+        document.getElementById('streakCount').textContent = streak;
+        
+        // Update other stats
+        this.updateProgress();
+    }
+    
+    showNoCardsMessage() {
+        const flashcardContainer = document.querySelector('.flashcard-container');
+        if (!flashcardContainer) return;
+        
+        flashcardContainer.innerHTML = `
+            <div class="no-cards-message">
+                <i class="fas fa-inbox"></i>
+                <h3>No Cards Found</h3>
+                <p>Try changing your filters or create a new card.</p>
+                <button class="btn-primary" id="createFirstCard">
+                    <i class="fas fa-plus"></i> Create Your First Card
+                </button>
+            </div>
+        `;
+        
+        document.getElementById('createFirstCard')?.addEventListener('click', () => {
+            this.openCustomCardModal();
+        });
+    }
+    
+    showMasteryFeedback(difficulty) {
+        const messages = {
+            easy: 'Great job! You\'ve mastered this card.',
+            medium: 'Good work! This card will be reviewed again soon.',
+            hard: 'Keep practicing! This card needs more review.'
+        };
+        
+        this.showNotification(messages[difficulty], 'success');
+    }
+    
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+            <button class="notification-close">&times;</button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+        
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        });
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.includes('flashcards.html')) {
+        const flashcards = new FlashcardsSystem();
+        window.flashcards = flashcards;
+    }
+});

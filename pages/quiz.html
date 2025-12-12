@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Quiz - Test Your Knowledge</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages/assets/style/quiz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="quiz-nav-controls">
+                <div class="quiz-timer">
+                    <div class="timer-circle">
+                        <svg width="60" height="60">
+                            <circle cx="30" cy="30" r="27" stroke-width="3" fill="none"></circle>
+                        </svg>
+                        <span id="timerDisplay">30</span>
+                    </div>
+                </div>
+                
+                <div class="quiz-score">
+                    <i class="fas fa-star"></i>
+                    <span>Score: <strong id="currentScore">0</strong></span>
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container quiz-container">
+        <!-- Quiz Header -->
+        <div class="quiz-header">
+            <div class="quiz-info">
+                <div class="quiz-meta">
+                    <span class="quiz-mode">Standard Quiz</span>
+                    <span class="quiz-difficulty">Mixed Difficulty</span>
+                    <span class="quiz-topic">Random Topics</span>
+                </div>
+                <h1 id="questionNumber">Question 1 of 15</h1>
+            </div>
+            
+            <div class="quiz-progress">
+                <div class="progress-bar">
+                    <div class="bar-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Progress: <span id="progressText">0%</span></span>
+                    <span>Time: <span id="totalTime">0:00</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Area -->
+        <div class="question-area">
+            <div class="question-card">
+                <div class="question-header">
+                    <h2 id="questionText">Who was the first man created by God?</h2>
+                    <div class="question-reference" id="questionReference">Genesis 2:7</div>
+                </div>
+                
+                <div class="choices-container" id="choicesContainer">
+                    <!-- Choices will be populated by JavaScript -->
+                </div>
+                
+                <div class="question-footer">
+                    <button class="btn-hint" id="hintButton">
+                        <i class="fas fa-lightbulb"></i> Hint (3 remaining)
+                    </button>
+                    <button class="btn-submit" id="submitAnswer" disabled>
+                        <i class="fas fa-paper-plane"></i> Submit Answer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hints Container -->
+            <div class="hints-container" id="hintContainer">
+                <!-- Hints will be added here -->
+            </div>
+            
+            <!-- Feedback Area -->
+            <div class="feedback-area hidden" id="feedback">
+                <div class="feedback-content">
+                    <div class="feedback-header">
+                        <h3 id="feedbackText"></h3>
+                        <div class="score-change" id="scoreChange">+10</div>
+                    </div>
+                    
+                    <div class="feedback-body">
+                        <div class="explanation" id="explanation">
+                            <!-- Explanation will be added here -->
+                        </div>
+                        
+                        <div class="ai-insight" id="aiInsight">
+                            <!-- AI insight will be added here -->
+                        </div>
+                        
+                        <div class="feedback-actions">
+                            <button class="btn-next" id="nextQuestion">
+                                <i class="fas fa-arrow-right"></i> Next Question
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Sidebar -->
+        <div class="quiz-sidebar">
+            <div class="sidebar-section">
+                <h3>Quiz Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Correct</span>
+                        <span class="stat-value" id="correctCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Incorrect</span>
+                        <span class="stat-value" id="incorrectCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Accuracy</span>
+                        <span class="stat-value" id="accuracyCount">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Avg. Time</span>
+                        <span class="stat-value" id="avgTimeCount">0s</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Streak Bonus</h3>
+                <div class="streak-display">
+                    <div class="streak-counter">
+                        <i class="fas fa-fire"></i>
+                        <span id="streakCounter">0</span>
+                    </div>
+                    <p>Correct streak: +<span id="streakBonus">0</span> bonus points</p>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="btn-action" id="pauseQuiz">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="btn-action" id="reviewLater">
+                        <i class="fas fa-bookmark"></i> Review
+                    </button>
+                    <button class="btn-action" id="reportQuestion">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Time Management</h3>
+                <div class="time-stats">
+                    <div class="time-item">
+                        <span>Time spent:</span>
+                        <span id="timeSpent">0:00</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Time remaining:</span>
+                        <span id="timeRemaining">7:30</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Time per question:</span>
+                        <span id="timePerQuestion">30s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pause Modal -->
+    <div class="modal" id="pauseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-pause"></i> Quiz Paused</h3>
+            </div>
+            <div class="modal-body">
+                <p>Your quiz progress has been saved. You can resume anytime.</p>
+                <div class="pause-stats">
+                    <div class="stat">
+                        <span class="label">Current Score</span>
+                        <span class="value" id="pauseScore">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Questions Completed</span>
+                        <span class="value" id="pauseCompleted">0/15</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Time Elapsed</span>
+                        <span class="value" id="pauseTime">0:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="quitQuiz">
+                    <i class="fas fa-sign-out-alt"></i> Quit Quiz
+                </button>
+                <button class="btn-primary" id="resumeQuiz">
+                    <i class="fas fa-play"></i> Resume Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-flag"></i> Report Question</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label>What's wrong with this question?</label>
+                        <select id="reportReason" required>
+                            <option value="">Select a reason</option>
+                            <option value="incorrect">Incorrect answer</option>
+                            <option value="typo">Typo or grammar error</option>
+                            <option value="ambiguous">Ambiguous or confusing</option>
+                            <option value="duplicate">Duplicate question</option>
+                            <option value="other">Other issue</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Additional details (optional)</label>
+                        <textarea id="reportDetails" rows="3" placeholder="Please provide more information..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelReport">Cancel</button>
+                <button class="btn-primary" id="submitReport">
+                    <i class="fas fa-paper-plane"></i> Submit Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="../quiz.js"></script>
+    <script src="quiz-ui.js"></script>
+</body>
+</html> 

@@ -1,0 +1,169 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - Bible Quiz Master</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../pages/assets/style/results.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bible"></i>
+                <span>Bible Quiz Master</span>
+            </a>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-badge" id="userBadge">
+                    <span class="streak">🔥 7</span>
+                    <img src="../assets/avatars/default.png" alt="User" class="avatar">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container results-container">
+        <!-- Results Header -->
+        <div class="results-header">
+            <div class="results-title">
+                <h1>Quiz Complete!</h1>
+                <p class="subtitle">Great job testing your biblical knowledge!</p>
+            </div>
+            
+            <div class="results-summary">
+                <div class="score-circle">
+                    <div class="circle-progress" data-score="85">
+                        <span class="score-percent">85%</span>
+                    </div>
+                </div>
+                <div class="summary-details">
+                    <h2>Your Score: <span class="highlight">425</span> points</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="label">Correct Answers</span>
+                            <span class="value">17/20</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Time Taken</span>
+                            <span class="value">4:32</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Average Time</span>
+                            <span class="value">13.6s</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Difficulty</span>
+                            <span class="value">Medium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Results Grid -->
+        <div class="results-grid">
+            <!-- Performance Breakdown -->
+            <div class="results-card large">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-line"></i> Performance Breakdown</h3>
+                    <button class="btn-outline btn-sm">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Topic Analysis -->
+            <div class="results-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-book"></i> Topic Analysis</h3>
+                </div>
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <span class="topic-name">Old Testament</span>
+                        <div class="topic-bar">
+                            <div class="bar-fill" style="width: 92%"></div>
+                        </div>
+                        <span class="topic-score">92%</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">New Testament</span>
+                        <div class="topic-bar">
+                            <div class="bar-fill" style="width: 88%"></div>
+                        </div>
+                        <span class="topic-score">88%</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Gospels</span>
+                        <div class="topic-bar">
+                            <div class="bar-fill" style="width: 95%"></div>
+                        </div>
+                        <span class="topic-score">95%</span>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Prophets</span>
+                        <div class="topic-bar">
+                            <div class="bar-fill" style="width: 78%"></div>
+                        </div>
+                        <span class="topic-score">78%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Earned -->
+            <div class="results-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-trophy"></i> Achievements Earned</h3>
+                </div>
+                <div class="achievements-earned">
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>Speed Demon</h4>
+                            <p>Answered all questions in under 5 minutes</p>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>Perfect Streak</h4>
+                            <p>5 correct answers in a row</p>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>Bible Scholar</h4>
+                            <p>Score 85% or higher on medium difficulty</p>
+                        </div>
+                    </div>
+                </div
